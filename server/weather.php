@@ -189,9 +189,11 @@ function get_cached_zipcode($zipcode)
 
 // MAINLINE!
 
-$zipcode = $default_zipcode;  // !!! FIXME: allow client to specify this.
+$display_w = isset($_REQUEST['dispw']) ? $_REQUEST['dispw'] : $default_display_width;
+$display_h = isset($_REQUEST['disph']) ? $_REQUEST['disph'] : $default_display_height;
+$zipcode = isset($_REQUEST['zip']) ? $_REQUEST['zip'] : $default_zipcode;
 $cached_zipcode = get_cached_zipcode($zipcode);
-echo render_current_weather($cached_zipcode, 480, 280);  // !!! FIXME: allow different sizes.
+echo render_current_weather($cached_zipcode, $display_w, $display_h);
 
 exit(0);
 
