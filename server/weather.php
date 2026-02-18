@@ -147,15 +147,15 @@ function get_cached_zipcode($zipcode)
     }
 
     if ($update) {
-        if ($json_metadata === NULL) {  // we don't even have latitude and longitude yet!
+        if ($json_metadata == NULL) {  // we don't even have latitude and longitude yet!
             $jsonstr = openweathermap_apicall('geo/1.0/zip', [ 'zip' => $zipcode ]);
             if ($jsonstr == NULL) {
-                fail503("Failed to get zipcode latitude/longitude, please try again later.");
+                fail503("Failed to get zipcode metadata, please try again later.");
             }
 
             $json_metadata = json_decode($jsonstr, TRUE);
             if ($json_metadata == NULL) {
-                fail503("Failed to get zipcode latitude/longitude, please try again later.");
+                fail503("Failed to decode zipcode metadata, please try again later.");
             }
 
             file_put_contents($fname_metadata, $jsonstr);
