@@ -110,7 +110,7 @@ function render_current_weather($info, $width, $height)
     $canvas->annotateImage($draw, $x, $y, 0, $str);
     $y += $metrics['textHeight'] + 1;
 
-    $str = intval(round($current['temp'])) . 'F  (Feels like ' . intval(round($current['feels_like'])) . 'F)';
+    $str = intval(round($current['temp'])) . "\xB0F  (Feels like " . intval(round($current['feels_like'])) . "\xB0F)";
     $metrics = $canvas->queryFontMetrics($draw, $str);
     $x = $im_x + (intval($im_w - $metrics['textWidth']) / 2);
     $canvas->annotateImage($draw, $x, $y, 0, $str);
