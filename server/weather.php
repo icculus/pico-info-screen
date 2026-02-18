@@ -84,7 +84,7 @@ function render_current_weather($info, $width, $height)
     $draw->setFillColor(new ImagickPixel('black'));
     $draw->setGravity(Imagick::GRAVITY_NORTHWEST);
     $draw->setFont('Xerxes 10.ttf');
-    $draw->setFontSize(30);
+    $draw->setFontSize(isset($_REQUEST['fontsize']) ? $_REQUEST['fontsize'] : 30);
 
     $im = new Imagick();
     $im->readImageBlob(get_cached_weather_icon($weather['icon']));
