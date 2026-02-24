@@ -1,3 +1,4 @@
 server/config.php
 server/*_cache
+client/pico-info-screen-config.h
 

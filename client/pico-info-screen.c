@@ -4,6 +4,27 @@
 #include "pico/stdlib.h"
 #include "pico/cyw43_arch.h"
 #include "waveshare-pico-epaper/EPD_3in7.h"
+#include "pico-info-screen-config.h"
+
+// these are all meant to be set, by you, in pico-info-screen-config.h
+#ifndef HOST
+#error Please define HOST in pico-info-screen-config.h
+#endif
+#ifndef URL_REQUEST
+#error Please define URL_REQUEST in pico-info-screen-config.h
+#endif
+#ifndef WIFI_SSID
+#error Please define WIFI_SSID in pico-info-screen-config.h
+#endif
+#ifndef WIFI_PASSWORD
+#error Please define WIFI_PASSWORD in pico-info-screen-config.h
+#endif
+#ifndef ZIPCODE
+#error Please define ZIPCODE in pico-info-screen-config.h
+#endif
+#ifndef USE_TLS
+#error Please define USE_TLS in pico-info-screen-config.h
+#endif
 
 // Pico W devices use a GPIO on the WIFI chip for the LED,
 // so when building for Pico W, CYW43_WL_GPIO_LED_PIN will be defined
