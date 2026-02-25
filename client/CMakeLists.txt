@@ -13,12 +13,19 @@ add_executable(pico-info-screen
     waveshare-pico-epaper/EPD_3in7.c
 )
 
-pico_enable_stdio_usb(pico-info-screen 1)  # enable serial output via USB
-pico_enable_stdio_uart(pico-info-screen 1)  # enable serial output via UART
-pico_add_extra_outputs(pico-info-screen)
+target_include_directories(pico-info-screen PRIVATE ${CMAKE_CURRENT_LIST_DIR})
+
+#pico_enable_stdio_usb(pico-info-screen 1)  # enable serial output via USB
+#pico_enable_stdio_uart(pico-info-screen 1)  # enable serial output via UART
+#pico_add_extra_outputs(pico-info-screen)
 
 if (PICO_CYW43_SUPPORTED)
-    target_link_libraries(pico-info-screen pico_cyw43_arch_none)
+    target_link_libraries(pico-info-screen
+        pico_cyw43_arch_lwip_threadsafe_background
+        pico_lwip_http
+        pico_lwip_mbedtls
+        pico_mbedtls
+    )
 endif()
 
 target_link_libraries(pico-info-screen pico_stdlib hardware_spi)
