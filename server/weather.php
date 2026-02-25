@@ -1,6 +1,6 @@
 <?php
 
-require('common.php');
+require_once('common.php');
 
 function do_apicall($url, $args = NULL)
 {
@@ -78,7 +78,7 @@ function render_current_weather($info, $width, $height)
     $canvas = new Imagick();
     $canvas->newImage($width, $height, new ImagickPixel('white'));
     $canvas->setImageType(Imagick::IMGTYPE_GRAYSCALE);
-    $canvas->setImageDepth(1);
+    $canvas->setImageDepth(4);
 
     $draw = new ImagickDraw();
     $draw->setFillColor(new ImagickPixel('black'));
@@ -186,14 +186,13 @@ function get_cached_zipcode($zipcode)
     return $retval;
 }
 
-
-// MAINLINE!
-
-$display_w = isset($_REQUEST['dispw']) ? $_REQUEST['dispw'] : $default_display_width;
-$display_h = isset($_REQUEST['disph']) ? $_REQUEST['disph'] : $default_display_height;
-$zipcode = isset($_REQUEST['zip']) ? $_REQUEST['zip'] : $default_zipcode;
-$cached_zipcode = get_cached_zipcode($zipcode);
-echo render_current_weather($cached_zipcode, $display_w, $display_h);
-
-exit(0);
+$available_pages[] = function()
+{
+    global $default_display_width, $default_display_height, $default_zipcode;
+    $display_w = isset($_REQUEST['dispw']) ? $_REQUEST['dispw'] : $default_display_width;
+    $display_h = isset($_REQUEST['disph']) ? $_REQUEST['disph'] : $default_display_height;
+    $zipcode = isset($_REQUEST['zip']) ? $_REQUEST['zip'] : $default_zipcode;
+    $cached_zipcode = get_cached_zipcode($zipcode);
+    echo render_current_weather($cached_zipcode, $display_w, $display_h);
+};
 
